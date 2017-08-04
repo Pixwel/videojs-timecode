@@ -1,15 +1,15 @@
 /*
- * Video.js Timecode
+ * Forked Video.js Timecode
  * Show timecodes in broadcast style hh:mm:ss:ff
  * Requires jQuery
  *
- * Copyright (c) 2015 gasvard
+ * Original Copyright (c) 2015 gasvard
  */
 
 (function(window, videojs) {
   'use strict';
 
-  window['videojs_timecode'] = { version: "0.0.1" };
+  window['videojs_timecode'] = { version: "0.0.2" };
   var timecode = function(options) {
     var player = this;
     var def_options = {
@@ -42,7 +42,7 @@
 })(window, window.videojs);
 
 //Converts time in seconds to a broadcast timecode
-//timeFormat: 'PAL', 'PALp', 'NTSC', 'STANDARD'
+//timeFormat: 'PAL', 'PALp', 'NTSC', 2398, 'STANDARD'
 function MillToTimecode(seconds, TimeFormat) {
 
     //alert(milliseconds);
@@ -70,6 +70,9 @@ function MillToTimecode(seconds, TimeFormat) {
     }
     else if (TimeFormat == 'NTSCp') {
         var f = Math.floor((seconds * 60000) / 1001);
+    }
+    else if (TimeFormat == '2398') {
+        var f = Math.floor(seconds * 24000 / 1001);
     }
     else if (TimeFormat == 'STANDARD') {
         var f = Math.floor(seconds * 1000);
